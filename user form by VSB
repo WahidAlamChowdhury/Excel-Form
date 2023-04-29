@@ -1,0 +1,32 @@
+Dim iRow As Long
+Dim ws As Worksheet
+Set ws = Worksheets("Sheet1")
+
+'find first empty row in database
+iRow = ws.Cells.Find(What:="*", SearchOrder:=xlRows, _
+    SearchDirection:=xlPrevious, LookIn:=xlValues).Row + 1
+
+'check for a Name number
+If Trim(Me.Textbox_name.Value) = "" Then
+  Me.Textbox_name.SetFocus
+  MsgBox "Please complete the form"
+  Exit Sub
+End If
+
+'copy the data to the database
+ws.Cells(iRow, 1).Value = Me.Textbox_name.Value
+ws.Cells(iRow, 2).Value = Me.TextBox_Fname.Value
+ws.Cells(iRow, 3).Value = Me.TextBox_Mname.Value
+ws.Cells(iRow, 4).Value = Me.TextBox_roll.Value
+ws.Cells(iRow, 5).Value = Me.TextBox_dob.Value
+ws.Cells(iRow, 6).Value = Me.TextBox_religion.Value
+MsgBox "Data added", vbOKOnly + vbInformation, "Data Added"
+
+'clear the data
+Me.Textbox_name.Value = ""
+Me.TextBox_Fname.Value = ""
+Me.TextBox_Mname.Value = ""
+Me.TextBox_roll.Value = ""
+Me.TextBox_dob.Value = ""
+Me.TextBox_religion.Value = ""
+Me.Textbox_name.SetFocus
